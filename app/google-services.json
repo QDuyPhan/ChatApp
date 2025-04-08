@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "116175954332",
+    "project_id": "chatapp-46869",
+    "storage_bucket": "chatapp-46869.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:116175954332:android:9cc7986b95a6b685ca6859",
+        "android_client_info": {
+          "package_name": "com.quangduy.chatapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCid-KCDGgiP0qKfsraV0sSqAu8OFjPp1A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
