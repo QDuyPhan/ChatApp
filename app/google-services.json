@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "116175954332",
+    "firebase_url": "https://chatapp-46869-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "chatapp-46869",
     "storage_bucket": "chatapp-46869.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.quangduy.chatapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "116175954332-3559gd0uvm835mh3kbq7ej7uvqs0uche.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.quangduy.chatapp",
+            "certificate_hash": "81ab4c642e60937d2d31e39782389469d804f480"
+          }
+        },
+        {
+          "client_id": "116175954332-61hkm6e0oc74c31l4rk2nd2ltqoho6fn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCid-KCDGgiP0qKfsraV0sSqAu8OFjPp1A"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "116175954332-61hkm6e0oc74c31l4rk2nd2ltqoho6fn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

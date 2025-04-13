@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.google.gms.google.services)
     id("androidx.navigation.safeargs.kotlin")
+    id("kotlin-parcelize")
 }
 
 android {
@@ -85,26 +86,28 @@ dependencies {
     implementation(libs.androidx.lifecycle.livedata.ktx)
 
     implementation(libs.kotlin.stdlib)
-    implementation (libs.material)
+    implementation(libs.material)
 
     // Firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
     implementation(libs.play.services.auth)
-    implementation (libs.firebase.messaging)
-    implementation (libs.firebase.installations)
-    implementation (libs.firebase.storage)
-    implementation (libs.firebase.auth)
-    implementation (libs.firebase.firestore)
-    implementation (libs.firebase.firestore.ktx)
-    implementation (libs.firebase.auth.ktx)
-    implementation (libs.firebase.database.ktx)
-    implementation (libs.firebase.config.ktx)
+    implementation(libs.firebase.messaging)
+    implementation(libs.firebase.installations)
+    implementation(libs.firebase.storage)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.firestore)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.config.ktx)
+    implementation(libs.play.services.maps)
+
 
 
 //    glide
-    implementation (libs.glide)
-    annotationProcessor (libs.compiler)
+    implementation(libs.glide)
+    annotationProcessor(libs.compiler)
 
     // Navigation
     implementation(libs.androidx.navigation.fragment.ktx)
@@ -124,5 +127,10 @@ dependencies {
     implementation(libs.circleimageview)
 
     implementation(libs.sdp.android)
+
+    implementation(libs.shimmer)
+
+    implementation(libs.androidx.datastore.preferences)
+
 
 }

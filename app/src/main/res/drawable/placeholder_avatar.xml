@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!-- Vòng tròn nền -->
+  <item>
+    <shape android:shape="oval">
+      <solid android:color="#E0E0E0" />
+    </shape>
+  </item>
+
+  <!-- Biểu tượng người dùng -->
+  <item
+      android:drawable="@drawable/ic_user_placeholder"
+      android:gravity="center" />
+
+</layer-list>

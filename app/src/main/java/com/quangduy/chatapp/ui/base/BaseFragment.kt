@@ -30,6 +30,14 @@ abstract class BaseFragment<VB : ViewBinding> : Fragment() {
         _binding = null
     }
 
+    protected fun showLoading() {
+        // show progress bar
+    }
+
+    protected fun hideLoading() {
+        // hide progress bar
+    }
+
     protected inline fun <T> observeResource(
         liveData: LiveData<Resource<T>>,
         crossinline onSuccess: (T) -> Unit,

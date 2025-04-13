@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.tasks.Task
 import com.quangduy.chatapp.ultils.Logger
 import com.quangduy.chatapp.ultils.NetworkHelper
 import com.quangduy.chatapp.ultils.Resource
@@ -36,6 +37,19 @@ abstract class BaseViewModel : ViewModel() {
     protected fun postError(message: String) {
         _errorMessage.postValue(message)
     }
+
+    protected fun <T> safeFirebaseCall(
+        liveData: MutableLiveData<Resource<T>>,
+        task: () -> Task<T>
+    ) {
+        liveData.postValue(Resource.loading(null))
+        task().addOnSuccessListener {
+            liveData.postValue(Resource.success(it))
+        }.addOnFailureListener {
+            liveData.postValue(Resource.error(it.localizedMessage ?: "Unknown error", null))
+        }
+    }
+
 
     inline fun <T> ViewModel.safeApiCall(
         liveData: MutableLiveData<Resource<T>>,
