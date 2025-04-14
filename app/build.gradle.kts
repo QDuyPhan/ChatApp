@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -7,6 +9,13 @@ plugins {
     alias(libs.plugins.google.gms.google.services)
     id("androidx.navigation.safeargs.kotlin")
     id("kotlin-parcelize")
+}
+val localProperties = Properties()
+val localPropertiesFile = rootProject.file("key.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.inputStream().use {
+        localProperties.load(it)
+    }
 }
 
 android {
@@ -21,6 +30,22 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField(
+            type = "String",
+            name = "YOUR_CLOUD_NAME",
+            value = localProperties["YOUR_CLOUD_NAME"].toString()
+        )
+        buildConfigField(
+            type = "String",
+            name = "YOUR_API_KEY",
+            value = localProperties["YOUR_API_KEY"].toString()
+        )
+        buildConfigField(
+            type = "String",
+            name = "YOUR_API_SECRET",
+            value = localProperties["YOUR_API_SECRET"].toString()
+        )
     }
 
     buildTypes {
@@ -104,7 +129,6 @@ dependencies {
     implementation(libs.play.services.maps)
 
 
-
 //    glide
     implementation(libs.glide)
     annotationProcessor(libs.compiler)
@@ -131,6 +155,7 @@ dependencies {
     implementation(libs.shimmer)
 
     implementation(libs.androidx.datastore.preferences)
+    implementation(libs.cloudinary.android)
 
 
 }

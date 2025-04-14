@@ -1,6 +1,7 @@
 package com.quangduy.chatapp.viewmodel
 
 import android.content.Context
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -22,6 +23,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -139,5 +141,35 @@ class ChatViewModel @Inject constructor(
 //                Log.e("ChatViewModel", "Không lấy được token: ${it.message}")
 //            }
 //    }
+
+    fun updateProfile() = viewModelScope.launch(ioDispatcher) {
+        val hashMapUser = hashMapOf<String, Any>(
+            "username" to name.value!!,
+            "imageUrl" to imageUrl.value!!
+        )
+
+        firestore.collection("Users").document(getUidLoggedIn())
+            .update(hashMapUser).addOnCompleteListener {
+                if (it.isSuccessful) {
+                    Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        val friendId = appSetting.getValue("friendId").first() ?: return@launch
+        val hashMapUpdate = hashMapOf<String, Any>(
+            "friendsImage" to imageUrl.value!!,
+            "name" to name.value!!,
+            "person" to name.value!!
+        )
+
+        firestore.collection("Conversation$friendId")
+            .document(getUidLoggedIn())
+            .update(hashMapUpdate)
+
+        firestore.collection("Conversation${getUidLoggedIn()}")
+            .document(friendId)
+            .update("person", "you")
+    }
+
 
 }

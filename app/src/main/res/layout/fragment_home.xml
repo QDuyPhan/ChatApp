@@ -92,7 +92,6 @@
         android:layout_margin="12dp"
         android:backgroundTint="#cccc"
         app:cardCornerRadius="16dp"
-        app:cardElevation="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

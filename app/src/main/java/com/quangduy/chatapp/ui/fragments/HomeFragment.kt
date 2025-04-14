@@ -113,6 +113,9 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(), OnItemClickListener {
                     .load(it)
                     .into(tlImage)
             }
+            tlImage.setOnSingClickListener {
+                findNavController().navigate(R.id.action_homeFragment_to_settingFragment)
+            }
         }
     }
 
