@@ -9,6 +9,10 @@ object Constants {
     const val NETWORK_TIMEOUT = 60L
 
     const val DEFAULT_TIMEOUT = 30L
+    const val BASE_URL = "https://fcm.googleapis.com/v1/projects/YOUR_PROJECT_ID/messages:send"
+    const val SERVER_KEY = "{inserserverkey}"
+    const val CONTENT_TYPE = "application/json"
+
 
     const val REQUEST_IMAGE_CAPTURE = 1
     const val REQUEST_IMAGE_PICK = 2

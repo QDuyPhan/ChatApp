@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.firestore.FirebaseFirestore
+import com.quangduy.chatapp.ultils.Constants.getUidLoggedIn
 import com.quangduy.chatapp.ultils.IODispatcher
 import com.quangduy.chatapp.ultils.Logger
 import com.quangduy.chatapp.ultils.Resource
@@ -21,6 +22,18 @@ class AuthViewModel @Inject constructor(
 
     private val _authResult = MutableLiveData<Resource<Unit>>()
     val authResult: LiveData<Resource<Unit>> get() = _authResult
+
+    fun statusOnline() {
+        if (auth.currentUser != null) {
+            firestore.collection("Users").document(getUidLoggedIn()).update("status", "Online")
+        }
+    }
+
+    fun statusOffline() {
+        if (auth.currentUser != null) {
+            firestore.collection("Users").document(getUidLoggedIn()).update("status", "Offline")
+        }
+    }
 
     fun login(email: String, password: String) {
         _authResult.value = Resource.loading(null)

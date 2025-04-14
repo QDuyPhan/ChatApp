@@ -23,7 +23,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -142,33 +142,26 @@ class ChatViewModel @Inject constructor(
 //            }
 //    }
 
-    fun updateProfile() = viewModelScope.launch(ioDispatcher) {
-        val hashMapUser = hashMapOf<String, Any>(
-            "username" to name.value!!,
-            "imageUrl" to imageUrl.value!!
-        )
+    fun updateProfile() = viewModelScope.launch(exceptionHandler) {
+        val currentUserId = getUidLoggedIn()
+        val currentName = name.value ?: return@launch
+        val currentImageUrl = imageUrl.value ?: return@launch
+        val friendId = appSetting.getValue("friendId").firstOrNull() ?: return@launch
 
-        firestore.collection("Users").document(getUidLoggedIn())
-            .update(hashMapUser).addOnCompleteListener {
-                if (it.isSuccessful) {
-                    Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
-                }
+        val result =
+            usersRepository.updateProfile(currentUserId, currentName, currentImageUrl, friendId)
+
+        withContext(mainDispatcher) {
+            if (result.isSuccess) {
+                Toast.makeText(context, "Updated", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(
+                    context,
+                    "Update failed: ${result.exceptionOrNull()?.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-
-        val friendId = appSetting.getValue("friendId").first() ?: return@launch
-        val hashMapUpdate = hashMapOf<String, Any>(
-            "friendsImage" to imageUrl.value!!,
-            "name" to name.value!!,
-            "person" to name.value!!
-        )
-
-        firestore.collection("Conversation$friendId")
-            .document(getUidLoggedIn())
-            .update(hashMapUpdate)
-
-        firestore.collection("Conversation${getUidLoggedIn()}")
-            .document(friendId)
-            .update("person", "you")
+        }
     }
 
 
