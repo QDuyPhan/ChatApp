@@ -27,7 +27,7 @@
       android:background="@drawable/rounded_rectangle_primary"
       android:padding="8dp"
       android:text="Hello"
-      android:textColor="@android:color/white"
+      android:textColor="#323142"
       android:textSize="15sp" />
 
 

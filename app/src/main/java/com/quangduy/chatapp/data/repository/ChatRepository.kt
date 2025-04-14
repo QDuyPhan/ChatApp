@@ -16,15 +16,15 @@ class ChatRepository @Inject constructor(
     fun getCurrentUser(callback: (Users?) -> Unit) {
         val uid = getUidLoggedIn()
         firestore.collection("Users").document(uid).addSnapshotListener { value, error ->
-                if (error != null) {
-                    Logger.logE("ChatRepository: ${error.message}")
-                    callback(null)
-                    return@addSnapshotListener
-                }
-
-                val user = value?.toObject(Users::class.java)
-                callback(user)
+            if (error != null) {
+                Logger.logE("ChatRepository: ${error.message}")
+                callback(null)
+                return@addSnapshotListener
             }
+
+            val user = value?.toObject(Users::class.java)
+            callback(user)
+        }
     }
 
     suspend fun sendMessage(
@@ -53,13 +53,14 @@ class ChatRepository @Inject constructor(
             "message" to message,
             "friendsImage" to friendImage,
             "name" to name,
-            "person" to "you"
+            "person" to "you",
+            "status" to "Offline"
         )
 
         firestore.collection("Conversation$sender").document(receiver).set(recentMap)
 
         firestore.collection("Conversation$receiver").document(sender).update(
-                "message", message, "time", time, "person", name
-            )
+            "message", message, "time", time, "person", name
+        )
     }
 }

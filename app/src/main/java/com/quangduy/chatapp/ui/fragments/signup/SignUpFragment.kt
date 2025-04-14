@@ -66,8 +66,15 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
                 ).show()
             } else {
                 viewModel.signUp(name, email, password)
+
             }
         }
+    }
+
+    private fun clearEditText() {
+        binding.edtFullName.text.clear()
+        binding.edtEmail.text.clear()
+        binding.edtPassword.text.clear()
     }
 
     private fun setupObservers() {
@@ -75,6 +82,7 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
             liveData = viewModel.authResult,
             onSuccess = {
                 binding.progressBar.visibility = View.VISIBLE
+                clearEditText()
                 Toast.makeText(requireContext(), "Đăng ký thành công", Toast.LENGTH_SHORT).show()
                 binding.progressBar.visibility = View.GONE
             },

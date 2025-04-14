@@ -32,7 +32,7 @@ class ChatFragment : BaseFragment<FragmentChatBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         args = ChatFragmentArgs.fromBundle(requireArguments())
-        Logger.logI("ChatFragment: ${args}")
+        Logger.logI("ChatFragment: ${args.users.status}")
         setupUI()
         sendMessage()
         getMessage()

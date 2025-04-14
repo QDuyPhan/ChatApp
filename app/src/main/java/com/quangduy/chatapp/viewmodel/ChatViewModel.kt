@@ -53,12 +53,28 @@ class ChatViewModel @Inject constructor(
 //    val chatList: LiveData<List<RecentChats>> = chatListRepository.getAllChatList()
 
     private val _chatList = MutableLiveData<List<RecentChats>>()
-    val chatList: LiveData<List<RecentChats>> = _chatList
+    val chatList: LiveData<List<RecentChats>> get() = _chatList
+
+    private val _status = MutableLiveData<String>()
+    val status: LiveData<String> get() = _status
 
     init {
         getAllUsers()
         getCurrentUser()
         getRecentChats()
+    }
+
+    fun getStatus(id: String) {
+        firestore.collection("Users").document(id).addSnapshotListener { value, error ->
+            if (error != null) {
+                Logger.logE("ChatViewModel: ${error.message}")
+                return@addSnapshotListener
+            }
+            if (value != null && value.exists()) {
+                val status = value.toObject(Users::class.java)
+                _status.value = status?.status ?: ""
+            }
+        }
     }
 
     private fun getRecentChats() {

@@ -18,6 +18,7 @@ import com.quangduy.chatapp.BuildConfig
 import com.quangduy.chatapp.R
 import com.quangduy.chatapp.databinding.FragmentSettingBinding
 import com.quangduy.chatapp.ui.base.BaseFragment
+import com.quangduy.chatapp.ultils.Logger
 import com.quangduy.chatapp.ultils.setOnSingClickListener
 import com.quangduy.chatapp.viewmodel.ChatViewModel
 import com.quangduy.chatapp.viewmodel.SettingViewModel
@@ -65,7 +66,9 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>() {
 
     private fun updateProfile() {
         binding.settingUpdateButton.setOnSingClickListener {
+            Logger.logI("SettingFragment Clicked update profile 1")
             chatViewModel.updateProfile()
+            Logger.logI("SettingFragment Clicked update profile 2")
         }
     }
 

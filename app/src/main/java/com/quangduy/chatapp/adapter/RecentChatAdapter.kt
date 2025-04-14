@@ -37,8 +37,6 @@ class RecentChatAdapter(
             .placeholder(R.drawable.placeholder_avatar)
             .into(holder.imageView)
 
-        Logger.logI("RecentChatAdapter Image URL: ${chat.friendsImage}")
-
         holder.timeView.text = chat.time?.substring(0, 5) ?: ""
 
         holder.itemView.setOnClickListener {

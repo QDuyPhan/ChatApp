@@ -23,20 +23,20 @@
           android:id="@+id/toolbarMain"
           android:layout_width="0dp"
           android:layout_height="?attr/actionBarSize"
-          android:background="#191970"
+          android:background="#4B4B4B"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/settingBackBtn"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="start"
-            android:layout_marginStart="10dp"
-            android:contentDescription="Back"
-            android:src="@drawable/ic_arrow_back"
-            app:tint="@color/white" />
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_margin="16dp"
+            android:background="@drawable/bg_circle_white"
+            android:padding="8dp"
+            android:src="@drawable/ic_arrow_back" />
+
       </androidx.appcompat.widget.Toolbar>
 
       <!-- Avatar -->
@@ -47,7 +47,6 @@
           android:layout_marginTop="32dp"
           android:layout_marginBottom="16dp"
           android:src="@drawable/person"
-          app:civ_border_color="#FE2C54"
           app:civ_border_width="2dp"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
@@ -86,18 +85,20 @@
             android:id="@+id/settingUpdateName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
             android:hint="Name"
             android:inputType="textCapWords"
             android:maxLength="25" />
       </com.google.android.material.textfield.TextInputLayout>
 
       <!-- Update Button -->
-      <Button
+      <androidx.appcompat.widget.AppCompatButton
           android:id="@+id/settingUpdateButton"
           android:layout_width="200dp"
           android:layout_height="wrap_content"
           android:layout_marginTop="24dp"
-          android:background="@drawable/bg_button_primary"
+          android:background="@drawable/btn_background"
           android:text="Update"
           android:textColor="#FFFFFF"
           android:textSize="16sp"

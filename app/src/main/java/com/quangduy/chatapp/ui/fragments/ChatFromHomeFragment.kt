@@ -49,7 +49,10 @@ class ChatFromHomeFragment : BaseFragment<FragmentChatFromHomeBinding>() {
         }
         Glide.with(requireContext()).load(args.recentschat.friendsImage)
             .into(binding.chatImageViewUser)
-        binding.chatUserStatus.text = args.recentschat.status
+        chatViewModel.getStatus(args.recentschat.friendId!!)
+        chatViewModel.status.observe(viewLifecycleOwner) {
+            binding.chatUserStatus.text = it
+        }
         binding.chatUserName.text = args.recentschat.name
     }
 
